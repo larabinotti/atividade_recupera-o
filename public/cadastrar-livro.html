@@ -47,6 +47,7 @@
                 <div class="btn-nav-white">
                     <a href="./cadastrar-autor.html">
                         <h3>Cadastrar autor</h3>
+
                     </a>
                 </div>
 
@@ -93,6 +94,10 @@
                                 <br>
                                 <select name="genero" id="fkGenero_lista">
                                     <option hidden selected> - Escolha uma opção - </option>
+                                    <option value="romance">Romance</option>
+                                    <option value="terror">Terror</option>
+                                    <option value="suspense">Suspense</option>
+                                    <option value="comedia">Comédia</option>
                                 </select>
                             </label>
 
@@ -100,6 +105,10 @@
                                 <br>
                                 <select name="autor" id="fkAutor_lista">
                                     <option hidden selected> - Escolha uma opção - </option>
+                                    <option value="machadoDeAssis">Machado de Assis</option>
+                                    <option value="jkRowling">J.K Rowling</option>
+                                    <option value="StephenKing">Stephen King</option>
+                                    <option value="CollenHoover">Collen Hoover</option>
                                 </select>
                             </label>
 
@@ -113,6 +122,12 @@
                                 Preço de Venda (R$):
                                 <br>
                                 <input name="precoVenda" id="precoVenda" maxlength="20" type="Text"></input>
+                            </label>
+
+                            <label>
+                                Quantidade disponível no estoque:
+                                <br>
+                                <input name="qtdEstoque" id="qtdEstoque" maxlength="20" type="text"></input>
                             </label>
 
 
@@ -147,9 +162,12 @@
             fkGenero: form_postagem.fkGenero_lista.value,
             fkAutor: form_postagem.fkAutor_lista.value,
             precoCompra: form_postagem.precoCompra.value,
-            precoVenda: form_postagem.precoVenda.value
+            precoVenda: form_postagem.precoVenda.value,
+            qtdEstoque: form_postagem.qtdEstoque.value
         }
+
         
+
 
         fetch(`/livros/cadastrar`, {
             method: "post",

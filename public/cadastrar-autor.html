@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Recuperação | Mural</title>
+    <title>Recuperação | Mural 33</title>
 
 
     <link rel="stylesheet" href="./css/estilo.css" />
@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="btn-nav">
-                        <h3>Cadastrar autor</h3>
+                    <h3>Cadastrar autor</h3>
                 </div>
 
 
@@ -116,51 +116,72 @@
     }
 
     function cadastrar() {
-        var nomeAutor = document.getElementById("nome");
+        var nomeAutor = document.getElementById("nome").value;
+
+        console.log("nomeAutor")
+        console.log(nomeAutor)
+        console.log("nomeAutor")
 
         let listaCaracteresNumeros = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0,
             "!", "@", "#", "$", "%", "&", "*",
             "(", ")", "£", "¢", "¹", "²", "³", "¬"];
 
-        for (let i = 0; i <= listaCaracteresNumeros.length; i++) {
-            if (nomeAutor.includes(listaCaracteresNumeros)) {
-                alert('O nome do autor não pode possuir números ou caracteres')
-            } else {
+        let erro = 0;
 
-        var corpo = {
-            nome: form_postagem.nome.value
+        for (let i = 0; i < nomeAutor.length; i++) {
+            for (let j = 0; j < listaCaracteresNumeros.length; j++) {
+                console.log(nomeAutor[i])
+                console.log(listaCaracteresNumeros[j])
+                console.log(nomeAutor[i] == listaCaracteresNumeros[j])
+                console.log("*************")
+
+                if (nomeAutor[i] == listaCaracteresNumeros[j]) {
+                    
+                    erro++
+                    alert('O nome do autor não pode possuir números ou caracteres');
+                    break;
+                }
+
+            }
         }
 
-        fetch(`/autores/cadastrar`, {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(corpo)
-        }).then(function (resposta) {
+        if (erro == 0) {
 
-            console.log("resposta: ", resposta);
-
-            if (resposta.ok) {
-                window.alert("Post realizado com sucesso. Você será redirecionado ao Acervo.");
-                window.location = "/";
-                limparFormulario();
-
-            } else if (resposta.status == 404) {
-                window.alert("Deu 404!");
-            } else {
-                throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+            var corpo = {
+                nome: form_postagem.nome.value
             }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
 
-        });
+            fetch(`/autores/cadastrar`, {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(corpo)
+            }).then(function (resposta) {
 
-        return false;
+                console.log("resposta: ", resposta);
 
+                if (resposta.ok) {
+                    window.alert("Post realizado com sucesso. Você será redirecionado ao Acervo.");
+                    window.location = "/";
+                    limparFormulario();
+
+                } else if (resposta.status == 404) {
+                    window.alert("Deu 404!");
+                } else {
+                    throw ("Houve um erro ao tentar realizar a postagem! Código da resposta: " + resposta.status);
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+
+            return false;
+
+        }
     }
-}
-    }
+
+
 
 
 </script>

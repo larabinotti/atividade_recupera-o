@@ -1,6 +1,3 @@
--- Arquivo de apoio, caso você queira criar tabelas como as aqui criadas para a API funcionar.
--- Você precisa executar os comandos no banco de dados para criar as tabelas,
--- ter este arquivo aqui não significa que a tabela em seu BD estará como abaixo!
 
 CREATE DATABASE livrariaRecuperacao20262;
 
@@ -26,3 +23,26 @@ CREATE TABLE livro (
     CONSTRAINT fk_livro_autor FOREIGN KEY (fkAutor) REFERENCES autor(id),
     CONSTRAINT fk_livro_genero FOREIGN KEY (fkGenero) REFERENCES genero(id)
 );
+
+CREATE informacoes_cliente (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    cpf CHAR(11),
+    livrosAdquiridos INT
+);
+
+CREATE forma_pagamento (
+    id INT PRIMARY KEY,
+    fk_livro INT,
+    fk_autor INT,
+    fk_cliente INT,
+    metodo VARCHAR(50),
+    dataPagamento VARCHAR(45)
+);
+
+INSERT INTO genero (nome) VALUES 
+('Romance'),
+('Terror'),
+('Comédia'),
+('Suspense');
+
+
